@@ -22,33 +22,26 @@ public class RESTWebServiceController {
 
 	private RestService restService;
 
-    // build create User REST API
+   
     @PostMapping
     public ResponseEntity<User> createUser(@RequestBody User user){
         User savedUser = restService.createUser(user);
         return new ResponseEntity<>(savedUser, HttpStatus.CREATED);
     }
 
-    // build get user by id REST API
-    // http://localhost:8080/api/users/1
     @GetMapping("{id}")
-    
     public ResponseEntity<User> getUserById(@PathVariable("id") Long userId){
         User user = restService.getUserById(userId);
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
-    // Build Get All Users REST API
-    // http://localhost:8080/api/users
     @GetMapping
     public ResponseEntity<List<User>> getAllUsers(){
         List<User> users = restService.getAllUsers();
         return new ResponseEntity<>(users, HttpStatus.OK);
     }
 
-    // Build Update User REST API
     @PutMapping("{id}")
-    // http://localhost:8080/api/users/1
     public ResponseEntity<User> updateUser(@PathVariable("id") Long userId,
                                            @RequestBody User user){
         user.setId(userId);
@@ -56,7 +49,6 @@ public class RESTWebServiceController {
         return new ResponseEntity<>(updatedUser, HttpStatus.OK);
     }
 
-    // Build Delete User REST API
     @DeleteMapping("{id}")
     public ResponseEntity<String> deleteUser(@PathVariable("id") Long userId){
         restService.deleteUser(userId);
